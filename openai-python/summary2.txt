@@ -1,0 +1,23 @@
+QA Backfill : Surabhi : Java also enable the Automation Framework
+
+Discussion with Shiva Kumar
+
+Devops : 1 senior CPD PS Devops, 1 junior/mid 247NOC devops : Feb 01
+
+Setup meeting with Shiva Kumar (share proposal with Shiva)
+
+Avinash tasks and sharing testing with Vinayak and others
+
+2023 goal setting, high level goals needed
+
+MIFA - Targets for 6 months
+
+ITTI - Targets for  6 months
+
+SuperSearch
+
+Rearchitecture - 6-9 months
+
+FYI only : Other hiring updates : Manager 2 shortlist, 
+
+C++ : 1 shortlist, drive
