@@ -1,23 +1,17 @@
-QA Backfill : Surabhi : Java also enable the Automation Framework
+Attendees : Moin, Avinash on leave
 
-Discussion with Shiva Kumar
+Vinayak :ISpeed client generation based on Solaris Server  - replicated on Linux, will build iSpeed with dependencies preparing document
 
-Devops : 1 senior CPD PS Devops, 1 junior/mid 247NOC devops : Feb 01
+Overview on SuperSearch
 
-Setup meeting with Shiva Kumar (share proposal with Shiva)
+Dhananjay : MIFA : Release modification and review, table design document (to share any changes to PM), plan to complete this review
 
-Avinash tasks and sharing testing with Vinayak and others
+Nishant : Supersearch project review with Vinayak/Avinash
 
-2023 goal setting, high level goals needed
+Monkshu review Tekmonks, missing mapping from Quick to SuperSearch Database
 
-MIFA - Targets for 6 months
+Koushik : VM scheduling 
 
-ITTI - Targets for  6 months
+Upcomign : SuperSearch/Monkshu reviews
 
-SuperSearch
 
-Rearchitecture - 6-9 months
-
-FYI only : Other hiring updates : Manager 2 shortlist, 
-
-C++ : 1 shortlist, drive
