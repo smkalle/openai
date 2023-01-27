@@ -12,3 +12,4 @@ image_url = response['data'][0]['url']
 print(image_url)
 filename=wget.download(image_url,out="/tmp/images")
 print(filename)
+

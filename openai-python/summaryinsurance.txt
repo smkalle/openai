@@ -1,0 +1,39 @@
+Sunil : 
+
+Insurance explore HAsegawa San
+
+Increase collaboration with India
+
+Explore core technologies
+
+DAta Science and Analytics
+
+OkoshiSan Would like to hear KosakiSan’s voice on these topics so that we can explore
+
+KosakiSan :
+
+Did he explain structure of Insurance org and where we are going?
+
+My teams goal is General Insurance and Insurance Agency, in JP insurance is siloed and unfriendly
+
+Since Gen Insurance recently, it is easier to offer insurance with Travel and other products
+
+So we do insurance debut from Gen Insurance, then move to high LTV products like General Insurance
+
+In terms of data, its important to capture right data and meaning, whether doing shopping or travel, right product at right time, understand life stage to do cross sell and upsell to life insurance
+
+Sunil :  Is this done offline or online
+
+KosakiSan : We are trying to embed as part of exisitn product. For ex. in travel do travel insurance as part of travel flow we want to do with other entities
+
+Platform for 1to1 marketing for all members, but we want to get data of members, by analyzing we can create logic we can identify which person needs which insurance right now and do the marketing within Rakuten Insurance Group. Thats what we are doing right now
+
+KosakiSan : Any information for Call Center, we are trying to establish a next generation call center. It is going to be relesed some time in February. I am not familiar if your team is involved in this
+
+Core System development is not only for Call Center but also for Insurance product, its very old and separate and we are trying to integrate for One Cloud
+
+Separate meeting Bilingual with Nalini/DJ for exploring Engineering Core System topic
+
+Anirban to setup meeting next week along with ShibataSan and YamashitaSan
+
+
