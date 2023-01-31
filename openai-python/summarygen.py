@@ -25,6 +25,7 @@ def summarize(input):
 	  frequency_penalty=0,
 	  presence_penalty=0
 	)
+    print("=================================================")
 	print(response["choices"][0].text)
 
 summarize(sys.argv[1])
