@@ -11,7 +11,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def index():    
         return '''
         <form action="/generate" method="post">
-            <input type="text" name="prompt">
+        <textarea rows = "4" cols = "40" name = "prompt">
+           
+         </textarea>
+         <br />
             <input type="submit" value="Generate">
         </form>
     '''

@@ -15,7 +15,7 @@ dalle_endpoint = "https://api.openai.com/v1/images/generations"
 dalle_api_key = "your_dalle_api_key_here"
 
 # Zen Quotation prompt
-prompt = "Generate random Zen Quotation by any Eastern Philosopher or Religious Guru"
+prompt = "Generate  Zen Quotation about Morning Light Energy by any Ancient Philosopher or Religious Guru or Stoic as a Koan or Haiku"
 
 
 # OpenAI API request to generate the quotation
@@ -42,7 +42,7 @@ print(zen_quotation)
 response = openai.Image.create(
     prompt=zen_quotation,
     n=1,
-    size="1024x1024"
+    size="512x512"
 )
 image_url = response['data'][0]['url']
 print(image_url)
