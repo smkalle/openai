@@ -2,6 +2,7 @@ import openai
 import tweepy
 import wget
 import sys
+import os
 
 # OpenAI API endpoint for text generation
 openai_endpoint = "https://api.openai.com/v1/engines/text-davinci-002/jobs"
@@ -14,10 +15,15 @@ openai_api_key = "your_openai_api_key_here"
 twitter_endpoint = "https://api.twitter.com/1.1/statuses/update.json"
 
 # Authentication keys and access tokens
-consumer_key = "GX8bK14fVbFSX28xqtz4eI2Ho"
-consumer_secret = "x1oswWgq9nGAbw16fZOhuJHvd69NVxuQbBfJ26SX5kgt7PxX7V"
-access_token = "929010792-YUEWFZzGfjKHz0RvVm6xQAkbLagQu8LgdN0Hp3WF"
-access_token_secret = "SSbh6JNohMPXRPUN4dqydS491MzO9rDTX8T8zHkDhkkRR"
+consumer_key = os.getenv("TWITTER_API_KEY")
+consumer_secret = os.getenv("TWITTER_API_KEY_SECRET")
+access_token = os.getenv("TWITTER_API_ACCESS_TOKEN")
+access_token_secret = os.getenv("TWITTER_API_ACCESS_TOKEN_SECRET")
+
+
+
+
+
 
 # Authenticate with Twitter API
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)

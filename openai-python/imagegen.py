@@ -6,7 +6,7 @@ input_text=sys.argv[1]
 response = openai.Image.create(
   prompt=input_text,
   n=1,
-  size="1024x1024"
+  size="512x512"
 )
 image_url = response['data'][0]['url']
 print(image_url)

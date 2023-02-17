@@ -1,0 +1,36 @@
+Slide 1:
+Header: Azure Announces Native New Relic Service for Full-Stack Observability
+Bullet Points: 
+• New service improves observability by consolidating Azure platform logs and Azure Monitor metrics 
+• Available on the Azure marketplace 
+• Reduces onboarding effort 
+• Simplifies cloud migrations and multi-cloud deployments 
+
+Slide 2:
+Header: Benefits of the Native Option
+Bullet Points: 
+• Leverage New Relic for observability without complex multistep process 
+• Organizations prefer using software and services they are familiar with 
+• Increase productivity and efficiency 
+
+Slide 3:
+Header: New Relic Observability Forecast
+Bullet Points: 
+• Most organizations expect to have robust observability practices in place by 2025 
+• Multi-cloud migration cited as one of the most common trends driving the need for observability 
+• New Relic offers integrations and options for AWS and Google 
+
+Slide 4:
+Header: New Relic Service on Azure
+Bullet Points: 
+• New Relic owns and runs the SaaS application 
+• Data is stored and processed in the Azure region where the service is deployed 
+• Billing for the New Relic Service is consumption based and consolidated with the Azure spending 
+
+Slide 5:
+Header: Conclusion
+Bullet Points: 
+• New Relic Service on Azure simplifies cloud migrations and multi-cloud deployments 
+• Reduces onboarding effort and increases productivity and efficiency 
+• Most organizations expect to have robust observability practices in place by 2025 
+• New Relic offers integrations and options for AWS and Google

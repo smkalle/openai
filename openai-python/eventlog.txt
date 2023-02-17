@@ -1,0 +1,147 @@
+AWS Patches Undocumented APIs Bypassing CloudTrail Event Logging
+DevOps
+QCon London (March 27-29, 2023): Adopt the right emerging trends to solve your engineering challenges.
+AWS Patches Undocumented APIs Bypassing CloudTrail Event Logging
+Like
+Print
+Bookmarks
+Feb 04, 2023
+2
+min read
+by
+Renato Losio
+Write for InfoQ Join a community of experts. Increase your visibility.
+Grow your career.Learn more
+AWS recently patched undocumented IAM APIs that bypassed CloudTrail logging. The vulnerability allowed a malicious user to perform reconnaissance activities on IAM without recording events in CloudTrail or being detected by Amazon GuardDuty.
+Last year the security research team at Datadog identified a subset of undocumented IAM API requests that were not logged in CloudTrail, the managed service enabling governance, compliance, operational auditing, and risk auditing on AWS. Nick Frichette, senior security researcher at Datadog, explains:
+Being able to bypass CloudTrail logging and getting the results of those calls has serious implications for defenders because it limits their ability to track what an adversary has done in an environment and what actions they have taken. Furthermore, this technique also makes it possible to bypass GuardDuty for findings such as IAMUser/AnomalousBehavior, because GuardDuty uses CloudTrail as a data source, and it cannot alert on something it cannot see.
+The issue impacted third-party tools and platforms that depend on CloudTrail logs to monitor account activity, including Datadog itself. Frichette describes how the vulnerability was detected:
+A straightforward (albeit slow) way to find undocumented APIs is to monitor network traffic in a web browser’s developer tools. (...) By monitoring this activity, you may notice API calls to unusual or undocumented services. While using the AWS Console, we noticed several requests to a service called iamadmin.
+Source: https://securitylabs.datadoghq.com/articles/iamadmin-cloudtrail-bypass/
+Undocumented APIs are an important focus in cloud security: security researchers at Rhino Security Labs recently identified an undocumented API for AWS CodeStar that could be used to escalate privileges in an AWS account. In a "Blind Spots in the Cloud" article, Spencer Gietzen, cloud security researcher at CrowdStrike, suggests:
+To prevent undocumented APIs from being used maliciously in your environment, it is important to grant permissions on a granular level. That means: Do not grant permissions using wildcards (such as using a * in AWS), and do not use managed permissions sets, as they are often overly permissive.
+Radware's latest State of API Security Survey suggests that the threat of undocumented APIs is underestimated:
+62% of those surveyed admit a third or more of APIs are undocumented.
+According to the disclosure timeline provided by Datadog, researchers report the issue to AWS in March 2022 and AWS worked for many months on different internal changes to align the CloudTrail logging and fix the iamadmin calls. While some users question the long disclosure timeline, user synackk comments on Reddit:
+A logging bypass on a read-only API is also not an omega bad exploit that requires all hands on deck to fix. The iamadmin APIs still required authentication and authorization to use.
+AWS has not made any public statement regarding the vulnerability or its resolution.
+About the Author
+Renato Losio
+Show moreShow less
+Inspired by this content? Write for InfoQ.
+Becoming an editor for InfoQ was one of the best decisions of my career. It has challenged me and helped me grow in so many ways. We'd love to have more people join our team.
+Thomas BettsLead Editor, Software Architecture and Design @InfoQ; Senior Principal Engineer
+Write for InfoQ
+Rate this Article
+Adoption
+Style
+Author Contacted
+This content is in the DevOps topic
+Related Topics:
+Architecture & Design
+DevOps
+AWS
+Cloud Security
+Amazon
+Security Vulnerabilities
+Security
+AWS CloudTrail
+Cloud Computing
+Cloud
+Related Editorial
+Related Sponsored Content
+[eBook] Understanding Kubernetes (Updated Edition)
+Related Sponsor
+Akamai Cloud Computing based on Linode. A developer-friendly and massively-distributed platform to build, run, and secure cloud workloads. Start a free trial today.
+Related Content
+Infrastructure from Code: the New Wave of Cloud Infrastructure Management
+Slack's Lessons Learned from Supporting Highly Regulated Workloads on AWS GovCloud
+AWS OpenSearch Serverless Now Generally Available
+AWS Gives Developers More Control over Lambda Function Runtime with Runtime Management Controls
+AWS Lambda Now Supports Maximum Concurrency for SQS as Event Source
+Google Delivers Comprehensive Cloud Infrastructure Reliability Guide
+Log Analytics Feature in Cloud Logging Now Generally Available
+AWS Releases SimSpace Weaver for Real-Time Spatial Simulations
+How to Test Your Fault Isolation Boundaries in the Cloud
+Pump It Up! Actually Gaining Benefit from Cloud Native Microservices
+Colliding Communities, Cloud Native, and Telecommunications Standards
+CloudFormation or Terraform: Which Iac Platform is the Best Fit for You?
+The Journey to API Management on the Cloud
+Securing APIs and Microservices in the Cloud
+Building Workflows with AWS Step Functions
+How to Migrate an Oracle Database to MySQL Using AWS Database Migration Service
+Choosing the Right Cloud Infrastructure for Your SaaS Start-up
+Building Applications from Edge to Cloud
+Cloud Native Network Functions Are Here
+Software Security Report Finds JavaScript Applications Have Fewer Flaws Than Java and .NET
+Terraform Cloud Adds Dynamic Provider Credentials and OPA Support
+Kubefirst Platform Improves Local Experience and Password Management
+Google Boosts Sandboxed Container File System Performance by Improving gVisor
+Optimized Reads and Optimized Writes Improve Amazon RDS Performances for MySQL Compatible Engines
+GCP Adds Simplified Operator for Connecting Google Kubernetes Engine to Cloud SQL
+Kubernetes Report Finds Increase in Poorly Configured Workloads
+Amazon Athena Now Supports Apache Spark Engine
+Containers and Serverless—Rivals or Cohorts?
+Lambda Throttling - How to Avoid It?
+Sigstore Releases Python Client
+Critical Control Web Panel Vulnerability Still Under Exploit Months After Patch Available
+Cloudflare DDoS Report Finds Increase in Attack Volume and Duration
+Amazon S3 Encrypts All New Objects with AES-256
+Data Protection Methods for Federal Organizations and beyond
+Using Serverless WebSockets to Enable Real-Time Messaging
+API Security: from Defense-in-Depth (DiD) to Zero Trust
+What Does Zero Trust Mean for Kubernetes?
+Successfully Integrating Dynamic Security Testing into Your CI/CD Pipeline
+Git 2.39.1 Fixes Two Critical Remote Code Execution Vulnerabilities
+Unskilled Cybercriminals May Be Leveraging ChatGPT to Create Malware
+The InfoQ Newsletter
+A round-up of last week’s content on InfoQ sent out every Tuesday. Join a community of over 250,000 senior developers.
+View an example
+Enter your e-mail address
+Select your country
+Select a country
+I consent to InfoQ.com handling my data as explained in this Privacy Notice.
+We protect your privacy.
+Hello stranger!
+You need to Register an InfoQ account or
+Login or login to post comments. But there's so much more behind being registered.
+Get the most out of the InfoQ experience.
+Tell us what you think
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Community comments
+Watch thread
+Close
+Your Reply
+Quote original message
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Cancel
+Close
+Your Reply
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Cancel
+Close
+OK
+Discuss
+Development
+Farewell to Subversion: GitHub Sunsets Support After 13 Years
+Go 1.20 Improves Compiler Performance and Extends Coverage Support
+Designing for Concurrency: the Hilbert’s Hotel Problem in Go
+Architecture & Design
+Avoid Being an "Ivory Tower" Architect: the Relationship between Architects and Their Organisation
+Expanding GraphQL Federation at Netflix with Tejas Shikhare
+No Next Next: Fighting Entropy in Your Microservices Architecture
+Culture & Methods
+There and Back Again: Our Rust Adoption Journey
+Secure Delivery: Better Workflows for Secure Systems and Pain-Free Delivery
+How to Analyze Behavior and Influence Behavior Change with the ABC Model
+AI, ML & Data Engineering
+Data Versioning at Scale: Chaos and Chaos Management
+Understanding and Debugging Deep Learning Models: Exploring AI Interpretability Methods
+OpenAI Releases an Advanced Classifier to Distinguish AI and Human Writing Styles
+DevOps
+Service Mesh Kuma Improves Policy Handling and Debugging Experience
+Grafana Tempo Introduces New Query Language and Support for Apache Parquet
+Hard-Won Lessons from the Trenches: Failure Modes of Platform Engineering — And How to Avoid Them

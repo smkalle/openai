@@ -11,8 +11,8 @@ def answer(question):
 	  # model="davinci-instruct-beta",
 	  model="text-curie-001",
 	  prompt= question + "\\nA:",
-	  temperature=0.2,
-	  max_tokens=128,
+	  temperature=1.2,
+	  max_tokens=1024,
 	  top_p=1,
 	  frequency_penalty=0,
 	  presence_penalty=0
@@ -25,7 +25,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # openai.api_base = "https://example-endpoint.openai.azure.com"
 # openai.api_version = "2022-12-01"
 
-print(openai.api_key)
+# print(openai.api_key)
 print(sys.argv[1])
 answer(sys.argv[1])
  

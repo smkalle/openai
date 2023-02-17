@@ -1,0 +1,26 @@
+Azure Announces Native New Relic Service for Full-Stack Observability
+Cloud
+QCon San Francisco (Oct 2-6, 2023): Find real-world practical inspiration from industry software leaders.
+Azure Announces Native New Relic Service for Full-Stack Observability
+Like
+Print
+Bookmarks
+Feb 10, 2023
+2
+min read
+by
+Renato Losio
+Write for InfoQ Join a community of experts. Increase your visibility.
+Grow your career.Learn more
+Azure recently announced a native New Relic service for full-stack observability. The performance monitoring service allows monitoring and troubleshooting of cloud applications in real time, providing metrics, traces, and logs.
+The new service improves observability by consolidating Azure platform logs and Azure Monitor metrics and sending them to New Relic, giving control of resources inside the Azure Portal and helping identify performance issues.
+Source: https://azure.microsoft.com/en-us/blog/azure-native-new-relic-service-full-stack-observability-in-minutes/
+Available on the Azure marketplace, the new option collects telemetry data for applications and infrastructure and will store data in Azure. Reducing the onboarding effort, the new integration depends on a connection setup through the Azure portal, while the agent can be added to the virtual machines via Site Extensions directly from the portal. Vikas Singhvi, senior product manager at Azure, explains the benefits of the native option:
+Organizations continue to prefer using software and services they are familiar with and trust (...) To leverage New Relic for observability, you go through a complex multistep process to set up credentials, event hubs, and custom code, thus impacting your productivity and efficiency.
+Azure expects the service to simplify cloud migrations and multi-cloud deployments in enterprise environments and Kevin Downs, solutions strategy director at New Relic, writes:
+New Relic’s Observability Forecast revealed that most organizations expect to have robust observability practices in place by 2025, with multi-cloud migration cited as one of the most common trends driving the need for observability (42%).
+According to the documentation of the new full-stack observability platform, New Relic owns and runs the SaaS application, including the New Relic organizations and accounts that are created and managed through the resource provider NewRelic.Observability. For New Relic accounts created directly on Azure, data is stored and processed in the Azure region where the service is deployed. For accounts created by the New Relic portal, data might be stored and processed outside the region or the Azure data centers.
+Michiel van Oudheusden, .NET consultant, suggests that the new service might bring back some teams to New Relic:
+I used New Relic in the past with great success, however on Azure we normally pick Application Insights. So interested to see this integration of New Relic into Azure itself!
+Without providing an integrated managed service, New Relic offers integrations and options for AWS and Google, available on their respective marketplaces.
+Being part of the Azure marketplace, the billing for the New Relic Service is consumption based and consolidated with the Azure spending, contributing to the Azure consumption commitment (MACC).

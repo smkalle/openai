@@ -1,0 +1,372 @@
+Infrastructure from Code: the New Wave of Cloud Infrastructure Management
+BT
+QCon New York (June 13-15, 2023): Learn how software leaders at early adopter companies are adopting emerging trends.
+Register Now
+Close
+Toggle Navigation
+Facilitating the Spread of Knowledge and Innovation in Professional Software Development
+English edition
+English edition
+Chinese edition
+Japanese edition
+French edition
+Write for InfoQ
+Search
+Sign Up / Login
+Email
+Password
+Forgot password ?
+InfoQ Account Email
+Back to login
+Resend Activation
+Back to login
+Login with:
+Google
+Microsoft
+Twitter
+Facebook
+Don't have an InfoQ account?
+Sign Up
+Logo - Back to homepage
+1,699,303 Jan unique visitors
+News
+Articles
+Presentations
+Podcasts
+Guides
+Topics
+Development
+Java
+Kotlin
+.Net
+C#
+Swift
+Go
+Rust
+JavaScript
+Featured in
+Development
+Designing for Concurrency: the Hilbert’s Hotel Problem in Go
+In this article, we want to show how achieving concurrency is the result of an appropriate design. A concurrent solution may turn out to be more elegant and easier to reason about than an equivalent sequential algorithm. To illustrate these concepts we use, as an example, the Hilbert’s Hotel mathematical problem.
+All in
+development
+Architecture & Design
+Architecture
+Enterprise Architecture
+Scalability/Performance
+Design
+Case Studies
+Microservices
+Service Mesh
+Patterns
+Security
+Featured in
+Architecture & Design
+Expanding GraphQL Federation at Netflix with Tejas Shikhare
+GraphQL can be a great choice for client to server communication, but it requires investment to maximize its potential. Netflix operates a very large, Federated GraphQL platform. Like any distributed system, this has some benefits, but also creates additional challenges. In this episode, Tejas Shikhare explains the pros and cons of scaling GraphQL adoption.
+All in
+architecture-design
+AI, ML & Data Engineering
+Big Data
+Machine Learning
+NoSQL
+Database
+Data Analytics
+Streaming
+Featured in
+AI, ML & Data Engineering
+Data Versioning at Scale: Chaos and Chaos Management
+Einat Orr discusses several technologies that version large data sets, the use cases they support and the technology developed to best support those use cases.
+All in
+ai-ml-data-eng
+Culture & Methods
+Agile
+Diversity
+Leadership
+Lean/Kanban
+Personal Growth
+Scrum
+Sociocracy
+Software Craftmanship
+Team Collaboration
+Testing
+UX
+Featured in
+Culture & Methods
+There and Back Again: Our Rust Adoption Journey
+Luca Palmieri discusses their Rust adoption story: from the first CLIs and projects to a new product line, sharing their expectations, challenges, mistakes and the lessons learned.
+All in
+culture-methods
+DevOps
+Infrastructure
+Continuous Delivery
+Automation
+Containers
+Cloud
+Observability
+Featured in
+DevOps
+Hard-Won Lessons from the Trenches: Failure Modes of Platform Engineering — And How to Avoid Them
+Platform Engineering is a hot topic with many orgs hoping to reap the benefits. However, it is easy to go astray. This article reviews the common pitfalls of building a platform and how to avoid them.
+All in
+devops
+EventsNew
+Helpful links
+About InfoQ
+InfoQ Editors
+Write for InfoQ
+About C4Media
+Diversity
+Choose your language
+En
+中文
+日本
+Fr
+QCon London
+Adopt the right emerging trends to solve your complex engineering challenges. Attend in-person or online.
+QCon New York
+Find real-world practical inspiration from the world’s most innovative software leaders. Attend in-person or online.
+The Software Architects' Newsletter
+Your monthly guide to all the topics, technologies and techniques that every professional needs to know about. Subscribe for free.
+InfoQ Homepage
+News
+Infrastructure from Code: the New Wave of Cloud Infrastructure Management
+DevOps
+QCon New York (June 13-15, 2023): Learn the best practices from senior developers at early adaptor companies.
+Infrastructure from Code: the New Wave of Cloud Infrastructure Management
+Like
+Print
+Bookmarks
+Feb 05, 2023
+2
+min read
+by
+Claudio Masolo
+Write for InfoQ Join a community of experts. Increase your visibility.
+Grow your career.Learn more
+Infrastructure-from-Code (IfC) is an approach that creates, configures, and manages cloud resources understanding a software application's source code, without explicit description. There are four primary approaches to Infra-from-Code: SDK-based, code annotation based, a combination of these two, and a new programming language that defines the infrastructure explicitly.
+The SDK-based approach allows developers to use their code and, at deployment time, the tools analyze how the service code uses the SDK and generates the infrastructure. The SDK-based approach makes inferring usage from code more predictable but the SDK is always a step behind in leveraging the new cloud features. An example of SDK-based tools are Ampt and Nitric.
+import { api } from '@nitric/sdk';
+const helloApi = api('main');
+helloApi.get('hello/:name', async(ctx) => {
+const {name} = ctx.req.params;
+ctx.res.body = 'Hello ${name}';
+})
+Nitric example of exposing endpoint to the Internet
+The pure annotations approach is based only on in-code annotation. This approach is focused on understanding the developer’s use of framework and tools. The leading tool of this approach is Klotho which is more of an Architecture-from-code tool. Klotho introduces the capabilities (key annotations) like expose, persist, and static_unit, that make existing programming languages cloud native.
+const redis = require("redis");
+/**
+* @klotho:persist{
+*
+id = "UserDB"
+*}
+*/
+const client = redis.createClient();
+Example of Klotho data persist for redis client
+With the annotations and SDK approach, the developer annotates the code and the tools incorporate those into the framework. The principal tools for this category are Encore and Shuttle. These tools can be hosted on the IfC vendor’s platform or may be integrated with third-party cloud providers like GCP, AWS, or Azure. Another interesting tool is AWS Chalice which allows the creation and deploys applications that use AWS Lambda in python.
+// encore:api public method=POST path=/url
+func Shorten(ctx context.Context, p *ShortenParams)(*URL, error){
+id, err := generateID()
+if err != nil {
+return nil, err
+}
+return &URL(ID: id, URL: p.URL), nil
+}
+Encore example for API request/response. The annotation specifies the URL path
+The language-based approach introduces new programming languages that aim to be cloud-centric. Wing and DarkLang are the two most used programming languages. This approach allows the introduction of concepts that would be difficult to achieve in existing programming languages. A new programming language has some tradeoffs: software developers need to first learn it and then integrate it into existing tools and services. In addition, finding and hiring developers with expertise in a new programming language can take time and effort.
+bring cloud;
+let bucket = new cloud.Bucket();
+new cloud.Function(inflight (_: str): str => {
+bucket.put("hello.txt","world");
+}
+Wing example of cloud function definition
+Chef, Ansible, Puppet, and Terraform were some of the first tools for Infrastructure-as-Code (IaC) and started to enable the creation and management of cloud infrastructures. The second wave of IaC used existing programming languages (Python, Go, TypeScript), to express the same idea as the tools of the first wave. Pulumi and CDK are tools of this second generation.
+For more details on the current state of Infrastructure from Code, readers are directed to Klotho's State of Infrastructure from Code 2023 report.
+About the Author
+Claudio Masolo
+Show moreShow less
+Inspired by this content? Write for InfoQ.
+Becoming an editor for InfoQ was one of the best decisions of my career. It has challenged me and helped me grow in so many ways. We'd love to have more people join our team.
+Thomas BettsLead Editor, Software Architecture and Design @InfoQ; Senior Principal Engineer
+Write for InfoQ
+Rate this Article
+Adoption
+Style
+Author Contacted
+This content is in the DevOps topic
+Related Topics:
+DevOps
+Infrastructure as Code
+Cloud
+Infrastructure
+Related Editorial
+Related Sponsored Content
+[eBook] Understanding Kubernetes (Updated Edition)
+Related Sponsor
+Akamai Cloud Computing based on Linode. A developer-friendly and massively-distributed platform to build, run, and secure cloud workloads. Start a free trial today.
+Related Content
+Choosing the Right Cloud Infrastructure for Your SaaS Start-up
+AWS Patches Undocumented APIs Bypassing CloudTrail Event Logging
+Google Delivers Comprehensive Cloud Infrastructure Reliability Guide
+Log Analytics Feature in Cloud Logging Now Generally Available
+How to Test Your Fault Isolation Boundaries in the Cloud
+Pump It Up! Actually Gaining Benefit from Cloud Native Microservices
+Colliding Communities, Cloud Native, and Telecommunications Standards
+CloudFormation or Terraform: Which Iac Platform is the Best Fit for You?
+The Journey to API Management on the Cloud
+Securing APIs and Microservices in the Cloud
+Kubernetes as a Foundation for Infrastructure Control Planes
+Building Applications from Edge to Cloud
+Cloud Native Network Functions Are Here
+Azure Announces Native New Relic Service for Full-Stack Observability
+Microsoft’s Fully-Managed Azure Load Testing Service Now Generally Available
+Containers and Serverless—Rivals or Cohorts?
+Azure Durable Functions Now Supports Storage Backends Microsoft Netherite and MSSQL
+gopaddle, a Low Code Internal Developer Platform for MicroK8s and Edge
+Go 1.20 Improves Compiler Performance and Extends Coverage Support
+Azure Now Supports Database as a Service Couchbase Capella
+Kubefirst Platform Improves Local Experience and Password Management
+AWS OpenSearch Serverless Now Generally Available
+Lambda Throttling - How to Avoid It?
+AWS Gives Developers More Control over Lambda Function Runtime with Runtime Management Controls
+Article Series: PHP 8.x
+Optimized Reads and Optimized Writes Improve Amazon RDS Performances for MySQL Compatible Engines
+AWS Lambda Now Supports Maximum Concurrency for SQS as Event Source
+The Six Ways of Optimizing WebAssembly
+How Palo Alto Approaches Platform Engineering
+Amazon Athena Now Supports Apache Spark Engine
+Google Address Validation API Is Generally Available to Improve Address Accuracy
+PHP 8 - Type System Improvements
+AWS Releases SimSpace Weaver for Real-Time Spatial Simulations
+Google Storage Transfer Service Now Supports Serverless Real-Time Replication Capability
+Amazon S3 Encrypts All New Objects with AES-256
+Microfrontends Anti-Patterns: Seven Years in the Trenches
+How Starling Built Their Own Card Processor
+The InfoQ eMag - The InfoQ Trends Reports 2022
+PHP 8 – Functions and Methods
+Using Serverless WebSockets to Enable Real-Time Messaging
+The InfoQ Newsletter
+A round-up of last week’s content on InfoQ sent out every Tuesday. Join a community of over 250,000 senior developers.
+View an example
+Enter your e-mail address
+Select your country
+Select a country
+I consent to InfoQ.com handling my data as explained in this Privacy Notice.
+We protect your privacy.
+Hello stranger!
+You need to Register an InfoQ account or
+Login or login to post comments. But there's so much more behind being registered.
+Get the most out of the InfoQ experience.
+Tell us what you think
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Community comments
+Watch thread
+Spelling error
+by Linton G,
+Re: Spelling error
+by Claudio Masolo,
+Spelling error
+by
+Linton G,
+Your message is awaiting moderation. Thank you for participating in the discussion.
+A small collection to the article, it's Pulumi and not Puluni.
+Like
+Reply
+Back to top
+Re: Spelling error
+by
+Claudio Masolo,
+Your message is awaiting moderation. Thank you for participating in the discussion.
+Thank you Linton. Fixed!
+Like
+Reply
+Back to top
+Close
+Your Reply
+Quote original message
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Cancel
+Close
+Your Reply
+Allowed html: a,b,br,blockquote,i,li,pre,u,ul,p
+Email me replies to any of my messages in this thread
+Cancel
+Close
+OK
+2
+Development
+Farewell to Subversion: GitHub Sunsets Support After 13 Years
+Go 1.20 Improves Compiler Performance and Extends Coverage Support
+Designing for Concurrency: the Hilbert’s Hotel Problem in Go
+Architecture & Design
+Avoid Being an "Ivory Tower" Architect: the Relationship between Architects and Their Organisation
+Expanding GraphQL Federation at Netflix with Tejas Shikhare
+No Next Next: Fighting Entropy in Your Microservices Architecture
+Culture & Methods
+There and Back Again: Our Rust Adoption Journey
+Secure Delivery: Better Workflows for Secure Systems and Pain-Free Delivery
+How to Analyze Behavior and Influence Behavior Change with the ABC Model
+AI, ML & Data Engineering
+Data Versioning at Scale: Chaos and Chaos Management
+Understanding and Debugging Deep Learning Models: Exploring AI Interpretability Methods
+OpenAI Releases an Advanced Classifier to Distinguish AI and Human Writing Styles
+DevOps
+Service Mesh Kuma Improves Policy Handling and Debugging Experience
+Grafana Tempo Introduces New Query Language and Support for Apache Parquet
+Hard-Won Lessons from the Trenches: Failure Modes of Platform Engineering — And How to Avoid Them
+The InfoQ Newsletter
+A round-up of last week’s content on InfoQ sent out every Tuesday. Join a community of over 250,000 senior developers.
+View an example
+Get a quick overview of content published on a variety of innovator and early adopter technologies
+Learn what you don’t know that you don’t know
+Stay up to date with the latest information from the topics you are interested in
+Enter your e-mail address
+Select your country
+Select a country
+I consent to InfoQ.com handling my data as explained in this Privacy Notice.
+We protect your privacy.
+QCon International Software Development Conference
+Real-world technical talks. No product pitches.Practical ideas to inspire you and your team.March 27-29, 2023. Attend in-person or online. QCon London brings together the world's most innovative senior software engineers across multiple domains to share their real-world implementation of emerging trends and practices.Level-up on 15 major software and leadership topics including Modern Frontend Development and Architecture, Enhancing Developer Productivity and Experience, Remote and Hybrid Work, Debugging Production, AI/ML Trends, Data Engineering Innovations, Architecture in 2025, and more.SAVE YOUR SPOT NOW
+Home
+Create account
+Login
+QCon Conferences
+Events
+Write for InfoQ
+InfoQ Editors
+About InfoQ
+About C4Media
+Media Kit
+InfoQ Developer Marketing Blog
+Diversity
+Events
+QCon London
+MARCH 27-29, 2023
+QCon New York
+JUNE 13-15, 2023
+QCon San Francisco
+OCTOBER 2-6, 2023
+Follow us on
+Youtube223K Followers
+Linkedin21K Followers
+RSS19K Readers
+Twitter53.4k Followers
+Facebook21K Likes
+AlexaNew
+Stay in the know
+The InfoQ Podcast
+Engineering Culture Podcast
+The Software Architects' Newsletter
+General Feedback
+feedback@infoq.com
+Advertising
+sales@infoq.com
+Editorial
+editors@infoq.com
+Marketing
+marketing@infoq.com
+InfoQ.com and all content copyright © 2006-2023 C4Media Inc.
+Privacy Notice, Terms And Conditions, Cookie Policy
+BT

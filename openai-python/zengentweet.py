@@ -1,6 +1,12 @@
+import random
+
 import openai
 import tweepy
 import wget
+import sys
+import time
+import os
+
 
 # OpenAI API endpoint for text generation
 openai_endpoint = "https://api.openai.com/v1/engines/text-davinci-002/jobs"
@@ -15,25 +21,33 @@ dalle_endpoint = "https://api.openai.com/v1/images/generations"
 dalle_api_key = "your_dalle_api_key_here"
 
 # Zen Quotation prompt
-prompt = "Generate  Zen Quotation about Morning Light Energy by any Ancient Philosopher or Religious Guru or Stoic as a Koan or Haiku"
-
+prompt = "Generate Quotation Philosopher or Religious Guru or Stoic or Zen Monk as a Koan or Haiku"
 
 # OpenAI API request to generate the quotation
 def gen_output(input):
-    print(input)
+
+    seed = int(time.time())
+    random.seed(seed)
+    randnum = random.uniform(0.2, 1.2)
+    print(seed)
+    print(randnum)
+
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=input,
-        temperature=0.8,
-        max_tokens=1000,
+        temperature=randnum,
+        max_tokens=256,
         top_p=1.0,
         frequency_penalty=0.2,
         presence_penalty=0.0,
     )
     print(response["choices"][0].text)
-    return (response["choices"][0].text)
+    return response["choices"][0].text
 
 
+# check number of arguments if sys.argv[1] is not None:
+if len(sys.argv) > 1:
+    prompt = sys.argv[1]
 zen_quotation = gen_output(prompt)
 
 # Extract the generated quotation
@@ -54,10 +68,10 @@ print(filename)
 twitter_endpoint = "https://api.twitter.com/1.1/statuses/update.json"
 
 # Authentication keys and access tokens
-consumer_key = "GX8bK14fVbFSX28xqtz4eI2Ho"
-consumer_secret = "x1oswWgq9nGAbw16fZOhuJHvd69NVxuQbBfJ26SX5kgt7PxX7V"
-access_token = "929010792-YUEWFZzGfjKHz0RvVm6xQAkbLagQu8LgdN0Hp3WF"
-access_token_secret = "SSbh6JNohMPXRPUN4dqydS491MzO9rDTX8T8zHkDhkkRR"
+consumer_key = os.getenv("TWITTER_API_KEY")
+consumer_secret = os.getenv("TWITTER_API_KEY_SECRET")
+access_token = os.getenv("TWITTER_API_ACCESS_TOKEN")
+access_token_secret = os.getenv("TWITTER_API_ACCESS_TOKEN_SECRET")
 
 # Authenticate with Twitter API
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)

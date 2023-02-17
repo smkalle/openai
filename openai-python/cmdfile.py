@@ -3,7 +3,7 @@ import os
 import openai
 
 
-def summarize(input):
+def cmd(run_command, input):
 
 	openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -16,16 +16,18 @@ def summarize(input):
 	openai.api_key = os.getenv("OPENAI_API_KEY")
 	print(data)
 	print('=' * 80)
+	print(run_command)
+	print('=' * 80)
 
 	response = openai.Completion.create(
 	  model="text-davinci-003",
-	  prompt=data,
+      prompt=run_command + ":\n" + data,
 	  temperature=0.2,
-	  max_tokens=256,
+	  max_tokens=1024,
 	  top_p=1,
 	  frequency_penalty=0,
 	  presence_penalty=0
 	)
 	print(response["choices"][0].text)
 
-summarize(sys.argv[1])
+cmd(sys.argv[1],sys.argv[2])

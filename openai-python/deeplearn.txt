@@ -1,0 +1,25 @@
+Deep Learning Pioneer Geoffrey Hinton Publishes New Deep Learning Algorithm
+AI, ML & Data Engineering
+Learning Rust the Hard Way for a Production Kafka + ScyllaDB Pipeline (Live Webinar Mar 2, 2023) - Save Your Seat
+Deep Learning Pioneer Geoffrey Hinton Publishes New Deep Learning Algorithm
+Like
+Print
+Bookmarks
+Jan 10, 2023
+2
+min read
+by
+Anthony Alford
+Write for InfoQ Join a community of experts. Increase your visibility.
+Grow your career.Learn more
+Geoffrey Hinton, professor at the University of Toronto and engineering fellow at Google Brain, recently published a paper on the Forward-Forward algorithm (FF), a technique for training neural networks that uses two forward passes of data through the network, instead of backpropagation, to update the model weights.
+Hinton's motivation for the algorithm is to address some of the shortcomings of standard backpropagation training which requires full knowledge of the computation in the forward pass to compute derivatives and storing activation values during training. Hinton's insight was to use two forward passes of input data---one positive and one negative---which have opposite objective functions to be optimized. Hinton showed that networks trained with FF could perform computer vision (CV) tasks about as well as those trained using backpropagation. According to Hinton,
+The Forward-Forward algorithm (FF) is comparable in speed to backpropagation but has the advantage that it can be used when the precise details of the forward computation are unknown. It also has the advantage that it can learn while pipelining sequential data through a neural network without ever storing the neural activities or stopping to propagate error derivatives....The two areas in which the forward-forward algorithm may be superior to backpropagation are as a model of learning in cortex and as a way of making use of very low-power analog hardware without resorting to reinforcement learning.
+Although artificial neural networks (ANN) are based on a mathematical model of the brain, the standard backpropagation algorithm used to train these networks is not based on any known biological process. Besides being biologically implausible, backpropagation also has some computational drawbacks as noted above. Hinton points out that ANNs can be trained using reinforcement learning (RL) without backpropagation, but this technique "scales badly...for large networks containing many millions or billions of parameters." In 2021, InfoQ covered a biologically-plausible alternative to backpropagation called zero-divergence inference learning (Z-IL) which can exactly reproduce the results of backpropagation.
+Hinton's FF algorithm replaces the forward-backward passes of backpropagation training with two forward passes that "operate in exactly the same way as each other." The first forward pass operates on positive data from a training set, and the network weights are adjusted to cause this input to increase a layer's goodness value. In the second forward pass, the network is given a generated negative example that is not taken from the dataset. The network weights are adjusted such that this input decreases a layer's goodness.
+Hinton used FF to train several neural networks to perform CV tasks on the MNIST and CIFAR datasets. The networks were relatively small, containing two or three hidden convolutional layers, and were trained for less than 100 epochs. When evaluated on test datasets, the FF-trained networks performed "only slightly worse" than those trained using backpropagation.
+Diego Fiori, CTO at Nebuly, implemented Hinton's FF algorithm and discussed his results on Twitter:
+Hinton’s paper proposed 2 different Forward-Forward algorithms, which I called Base and Recurrent. Let’s see why, despite the name, Base is actually the most performant algorithm....the Base FF algorithm can be much more memory efficient than the classical backprop, with up to 45% memory savings for deep networks.
+Fiori open-sourced his implementation of FF on GitHub. Mohammad Pezeshki, a PhD student at Université de Montréal, also open-sourced his own implementation.
+About the Author
+Anthony Alford

@@ -1,0 +1,53 @@
+
+Infrastructure-from-Code (IfC) is an approach that creates, configures, and manages cloud resources understanding a software application's source code, without explicit description. There are four primary approaches to Infra-from-Code: SDK-based, code annotation based, a combination of these two, and a new programming language that defines the infrastructure explicitly.
+
+The SDK-based approach allows developers to use their code and, at deployment time, the tools analyze how the service code uses the SDK and generates the infrastructure. The SDK-based approach makes inferring usage from code more predictable but the SDK is always a step behind in leveraging the new cloud features. An example of SDK-based tools are Ampt and Nitric.
+
+import { api } from '@nitric/sdk';
+
+const helloApi = api('main');
+
+helloApi.get('hello/:name', async(ctx) => {
+    const {name} = ctx.req.params;
+    ctx.res.body = 'Hello ${name}';
+})
+                Nitric example of exposing endpoint to the Internet
+
+The pure annotations approach is based only on in-code annotation. This approach is focused on understanding the developer’s use of framework and tools. The leading tool of this approach is Klotho which is more of an Architecture-from-code tool. Klotho introduces the capabilities (key annotations) like expose, persist, and static_unit, that make existing programming languages cloud native.
+
+const redis = require("redis");
+/**
+* @klotho:persist{
+*   id = "UserDB" 
+*}
+*/
+
+const client = redis.createClient();
+               Example of Klotho data persist for redis client
+
+With the annotations and SDK approach, the developer annotates the code and the tools incorporate those into the framework. The principal tools for this category are Encore and Shuttle. These tools can be hosted on the IfC vendor’s platform or may be integrated with third-party cloud providers like GCP, AWS, or Azure. Another interesting tool is AWS Chalice which allows the creation and deploys applications that use AWS Lambda in python.
+
+// encore:api public method=POST path=/url
+func Shorten(ctx context.Context, p *ShortenParams)(*URL, error){
+    id, err := generateID()
+    if err != nil {
+       return nil, err
+    }
+    return &URL(ID: id, URL: p.URL), nil
+}
+                Encore example for API request/response. The annotation specifies the URL path
+
+The language-based approach introduces new programming languages that aim to be cloud-centric. Wing and DarkLang are the two most used programming languages. This approach allows the introduction of concepts that would be difficult to achieve in existing programming languages. A new programming language has some tradeoffs: software developers need to first learn it and then integrate it into existing tools and services. In addition, finding and hiring developers with expertise in a new programming language can take time and effort.
+
+bring cloud;
+
+let bucket = new cloud.Bucket();
+
+new cloud.Function(inflight (_: str): str => {
+    bucket.put("hello.txt","world");
+}
+                Wing example of cloud function definition
+
+Chef, Ansible, Puppet, and Terraform were some of the first tools for Infrastructure-as-Code (IaC) and started to enable the creation and management of cloud infrastructures. The second wave of IaC used existing programming languages (Python, Go, TypeScript), to express the same idea as the tools of the first wave. Pulumi and CDK are tools of this second generation.
+
+For more details on the current state of Infrastructure from Code, readers are directed to Klotho's State of Infrastructure from Code 2023 report.

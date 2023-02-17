@@ -1,0 +1,123 @@
+Summarize the code snippets below in English :
+
+
+## detail :
+
+TEST 1
+
+  Answer of 1 : answered
+  Answer of 2 : change source,
+                The specific error is gone, but the fix is causing new error.
+        other error is:
+                main/hpp/TCPSSend.h:30:6: error: 'TCPSSendThread' was not declared in this scope
+                // this error is created by comment out include "TCPSSendThread.h"
+  Rate : 50 %
+
+TEST 2
+
+  Answer of 1 : correct answer
+  Answer of 2 : correct answer
+  Answer of 3 : correct answer
+  Answer of 4 : fixed : OK
+  Answer of 5 : correct answer
+
+  Rate : 100 %
+
+##################
+this is answer text
+##################
+
+
+### TEST1 ###
+
+==> CHECK ANSWER
+
+1. What is the cause of the following make error ?
+
+ANS: There is a circular dependency between TCPSSendThread.h and TCPSSend.h
+
+2. change source code to fix above 3 make error ONLY.
+
+ANS: Line 20: File: TCPSSend.h, commented it
+
+==> CHECK_source_code:
+
+index deb89bb..e0eff3d
+--- a/dlj/source/main/hpp/TCPSSend.h
++++ b/dlj/source/main/hpp/TCPSSend.h
+@@ -17,7 +17,7 @@
+ #include "TCPSend.h"
+ #include "SocketManagement.h"
+ #include "TCPS.h"
+-#include "TCPSSendThread.h"
++//#include "TCPSSendThread.h"
+ #include "TCPSRecvThread.h"
+
+
+### TEST2 ###
+
+==> CHECK ANSWER
+
+1. "test1-1" program take the following error.
+   What does the error mean?
+
+    ## ERROR : errno = 84
+
++        ANS: As per, https://man7.org/linux/man-pages/man3/iconv.3.html
++                EILSEQ An invalid multibyte sequence has been encountered in the input.
+
+2. What causes the error (errno = 84 ) ?
+
++       ANS: In essence what it means is, a wide character was attempted to be converted to a no wide character or vice versa
+
+3. Why are CORE dumps occurring ?
+
++        ANS: Core dump was occuring because we are trying to access a character beyond its length
+
+4. Correct the source code correctly.
+    (Solve errno 84 and core dump.)
+
++       ANS: line 35: size_t l = (size_t)euc_len
++               line 36: size_t r = (size_t)sj_len
++
++               Line 40: &l
++               Line 42: &r
+
+5. Please explain the code that modified to fix the CORE dump and error problem.
+
++       ANS:  The coredump was occuring in the iconv call.
++               For the following line (size_t *)&euc_len.
++               Here we are tring to cast an int* to size_t*.
++               What we should be doing instead is casting int to size_t
++
++               So, I created a temporary variable size_t l = (size_t)euc_len and passed &l in iconv.
++               Repeat the same for (size_t *)&sj_len
+
+### NO_ANSWER ###
+
+=> CHECK_source_code:
+diff --git a/test1-1.c b/test1-1.c
+old mode 100644
+new mode 100755
+index b3fc68f..4b7b070
+--- a/test1-1.c
++++ b/test1-1.c
+@@ -32,13 +32,14 @@ int osl_lang_euctosj(
+        if( iconv_sts == (iconv_t)( -1 ) ) {
+                return( ERROR );
+        }
+-
++size_t l = (size_t)euc_len;
++size_t r = (size_t)sj_len;
+        nStatus = iconv(
+                                iconv_sts,
+                                &work_buff,
+-                               ( size_t * )&euc_len,
++                               &l,
+                                &sj_str,
+-                               ( size_t * )&sj_len
++                               &r
+        );
+        nErrorNo        = errno;
+
+END

@@ -1,0 +1,39 @@
+Summarize this week's activities as bullet points and separate categories:
+
+Go through batch master code base for understanding data being ingested to SuperSearch DB from Core DB
+Help Avinash if needed for ITTI
+Go through Redis Cache implementation done by Iqbal so that we can prepare a similar POC done by the intern as per their first project
+Work on ispeed.
+Check the ispeed client generation on mac-mini1.
+Create a confluence page for the mac-min1 details and add the os update procedure.
+
+
+
+
+DB EXA Migration
+Testing of dx_kun tool
+Understanding of current oracle exa grid infrastructure
+
+
+
+MW
+Update binaries on Solaris server from SQA Environment
+Test Driver
+Connect with Arun on the implementation of his code for MSMC
+
+
+ITTI
+Evidence format (Nishant/Vinayak/Avinash)
+Talk to Mule Expert wrt cursor issue
+Heap issue test(Avinash/Koushik)
+Retest for NG test cases (Avinash/Vinayak)
+
+Continue on RPM for RT server.
+Explore on dlj user creation from existing rt.spec file
+manually execute jenkinsfile script in new rpm container to test packaging.
+support on mule deployment for individual dev access.
+
+Continue testing on ITTI
+
+
+
