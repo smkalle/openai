@@ -1,11 +1,107 @@
-from flask import Flask, render_template, request, jsonify
-import psycopg2  # assuming you're using PostgreSQL as the database
+from flask import Flask, render_template, flash, redirect, url_for
+from flask_wtf import FlaskForm
+from flask import request
+from wtforms import StringField, IntegerField
+from wtforms.validators import InputRequired
 
 app = Flask(__name__)
+app.secret_key = 'secret'
 
-@app.route('/')
+# Mock database connection
+conn = {
+    'host': '',
+    'port': ''
+}
+
+# Mock table data
+tables = [
+    {
+        'name': 'orders',
+        'columns': ['order_id', 'customer_name', 'order_date'],
+        'data': [
+            {'order_id': 1, 'customer_name': 'John Doe', 'order_date': '2022-01-01'},
+            {'order_id': 2, 'customer_name': 'Jane Smith', 'order_date': '2022-01-02'},
+            {'order_id': 3, 'customer_name': 'Bob Johnson', 'order_date': '2022-01-03'}
+        ]
+    },
+    {
+        'name': 'products',
+        'columns': ['product_id', 'product_name', 'price'],
+        'data': [
+            {'product_id': 1, 'product_name': 'Product A', 'price': 10.99},
+            {'product_id': 2, 'product_name': 'Product B', 'price': 20.99},
+            {'product_id': 3, 'product_name': 'Product C', 'price': 30.99}
+        ]
+    }
+]
+import sqlite3
+from collections import namedtuple
+
+Table = namedtuple('Table', ['name', 'columns', 'rows'])
+Column = namedtuple('Column', ['name', 'type'])
+Row = namedtuple('Row', ['values'])
+
+def create_connection(db_type, host, port, username, password):
+    # Create a mock database connection
+    conn = sqlite3.connect(':memory:')
+    return conn
+
+def get_tables(conn):
+    # Generate mock data for each table
+    customers_data = [
+        Row(['John Smith', '123 Main St', 'Anytown, USA', '555-1234']),
+        Row(['Jane Doe', '456 Elm St', 'Sometown, USA', '555-5678']),
+        Row(['Bob Johnson', '789 Oak St', 'Yourtown, USA', '555-9012'])
+    ]
+    orders_data = [
+        Row(['1', '2023-02-01', 'John Smith', 'Red Widget', '10', '100.00']),
+        Row(['2', '2023-02-02', 'Jane Doe', 'Green Widget', '20', '200.00']),
+        Row(['3', '2023-02-03', 'Bob Johnson', 'Blue Widget', '30', '300.00'])
+    ]
+
+    # Define the schema for each table
+    customers_columns = [
+        Column('Name', 'TEXT'),
+        Column('Address', 'TEXT'),
+        Column('CityStateZip', 'TEXT'),
+        Column('Phone', 'TEXT')
+    ]
+    orders_columns = [
+        Column('OrderID', 'INTEGER'),
+        Column('OrderDate', 'DATE'),
+        Column('CustomerName', 'TEXT'),
+        Column('Product', 'TEXT'),
+        Column('Quantity', 'INTEGER'),
+        Column('Price', 'REAL')
+    ]
+
+    # Create a list of tables
+    customers = Table('Customers', customers_columns, customers_data)
+    orders = Table('Orders', orders_columns, orders_data)
+    tables = [customers, orders]
+
+    return tables
+
+class ConnectionForm(FlaskForm):
+    host = StringField('Host', validators=[InputRequired()])
+    port = IntegerField('Port', validators=[InputRequired()])
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+    form = ConnectionForm()
+    if form.validate_on_submit():
+        conn['host'] = form.host.data
+        conn['port'] = form.port.data
+        flash('Connected successfully', 'success')
+        return redirect(url_for('tables'))
+    return render_template('home.html', form=form)
+
+@app.route('/tables', methods=['GET', 'POST'])
+def tables():
+    if not conn['host'] or not conn['port']:
+        flash('Please enter connection information', 'danger')
+        return redirect(url_for('home'))
+    return render_template('tables.html', tables=tables)
 
 @app.route('/connect', methods=['POST'])
 def connect():
@@ -14,61 +110,15 @@ def connect():
     port = request.form['port']
     username = request.form['username']
     password = request.form['password']
-    database = request.form['database']
-    try:
-        conn = psycopg2.connect(
-            host=host,
-            port=port,
-            user=username,
-            password=password,
-            database=database
-        )
-        cur = conn.cursor()
-        cur.execute('SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\'')
-        tables = [t[0] for t in cur.fetchall()]
-        conn.close()
-        return render_template('table.html', tables=tables)
-    except psycopg2.Error as e:
-        error_message = str(e)
-        return render_template('index.html', error=error_message)
 
-@app.route('/table', methods=['POST'])
-def table():
-    table_name = request.form['table']
-    conn = psycopg2.connect(
-        host=request.form['host'],
-        port=request.form['port'],
-        user=request.form['username'],
-        password=request.form['password'],
-        database=request.form['database']
-    )
-    cur = conn.cursor()
-    cur.execute(f'SELECT column_name, data_type FROM information_schema.columns WHERE table_name = \'{table_name}\'')
-    columns = [(c[0], c[1]) for c in cur.fetchall()]
-    conn.close()
-    return render_template('column.html', table=table_name, columns=columns)
+    # Create a mock database connection
+    conn = create_connection(db_type, host, port, username, password)
 
-@app.route('/validate', methods=['POST'])
-def validate():
-    table_name = request.form['table']
-    conn = psycopg2.connect(
-        host=request.form['host'],
-        port=request.form['port'],
-        user=request.form['username'],
-        password=request.form['password'],
-        database=request.form['database']
-    )
-    cur = conn.cursor()
-    cur.execute(f'SELECT column_name, data_type FROM information_schema.columns WHERE table_name = \'{table_name}\'')
-    columns = [(c[0], c[1]) for c in cur.fetchall()]
-    conn.close()
-    validations = {}
-    for column in columns:
-        column_name = column[0]
-        validation = request.form.get(column_name)
-        if validation:
-            validations[column_name] = validation
-    return jsonify(validations)
+    # Get the list of tables for the selected database
+    tables = get_tables(conn)
+
+    return render_template('tables.html', tables=tables)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Database Connection Form</title>
+    <title>Database Console</title>
 </head>
 <body>
-	<form action="/connect" method="POST">
-		<label for="db_type">Database Type:</label>
-		<input type="text" id="db_type" name="db_type"><br><br>
-		<label for="host">Host:</label>
-		<input type="text" id="host" name="host"><br><br>
-		<label for="port">Port:</label>
-		<input type="text" id="port" name="port"><br><br>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username"><br><br>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password"><br><br>
-		<label for="database">Database:</label>
-		<input type="text" id="database" name="database"><br><br>
-		<input type="submit" value="Connect">
-	</form>
+    <h1>Database Console</h1>
+    <form action="/connect" method="post">
+        <label for="db_type">Database Type:</label>
+        <select id="db_type" name="db_type">
+            <option value="mysql">MySQL</option>
+            <option value="postgres">PostgreSQL</option>
+            <option value="oracle">Oracle</option>
+        </select><br><br>
+        <label for="host">Host:</label>
+        <input type="text" id="host" name="host"><br><br>
+        <label for="port">Port:</label>
+        <input type="text" id="port" name="port"><br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Connect">
+    </form>
 </body>
 </html>
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Console</title>
+</head>
+<body>
+    <h1>Database Console</h1>
+    <h2>Tables:</h2>
+    <ul>
+        {% for table in tables %}
+            <li>{{ table.name }}</li>
+            <ul>
+                {% for
+            column in table.columns %}
+                <li>{{ column.name }} ({{ column.type }})</li>
+            {% endfor %}
+        </ul>
+        <p>Mock data:</p>
+        <table>
+            <thead>
+                <tr>
+                    {% for column in table.columns %}
+                        <th>{{ column.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table.rows %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</ul>
+</body>
+</html>
